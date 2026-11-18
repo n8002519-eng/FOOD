@@ -139,3 +139,4 @@ vercel
 ---
 
 &copy; 2026 **FOOD.UZ** — Crafted with ❤️ for Uzbekistan.
+
