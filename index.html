@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOOD | #1 Food Delivery in Uzbekistan | Tashkent Express</title>
+  <meta name="description" content="Order delicious halal food from top restaurants across Tashkent. Burgers, Pizza, Sushi, Pasta, Drinks & Desserts delivered fast to your door in 30 minutes." />
+  <meta name="keywords" content="food delivery Tashkent, food delivery Uzbekistan, Halal food Tashkent, burger delivery, pizza Tashkent, sushi delivery Tashkent" />
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FOOD - Delicious Food Delivered To Your Door in Uzbekistan" />
+  <meta property="og:description" content="Lightning-fast 30-minute delivery in Tashkent. Explore our wide menu with real-time cart, favorites & promotions." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="theme-color" content="#FF5722" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Announcement Bar (Top) -->
+  <aside class="announcement-bar" aria-label="Announcement">
+    <div class="container announcement-inner">
+      <div class="announcement-text">
+        <span class="flag">🇺🇿</span>
+        <span>Express food delivery across <strong>Tashkent</strong> in <strong>30 minutes</strong>! 100% Halal certified.</span>
+      </div>
+      <div class="announcement-links">
+        <a href="tel:+998712000000"><i data-lucide="phone"></i> +998 (71) 200-00-00</a>
+        <a href="#offers"><i data-lucide="tag"></i> Use Code: <strong>FOODUZ20</strong> for 20% OFF</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar-sticky">
+    <div class="container navbar-container">
+      <!-- FOOD Brand Logo -->
+      <a href="#home" class="brand-logo" aria-label="FOOD Uzbekistan Home">
+        <div class="brand-icon-box">
+          <i data-lucide="utensils"></i>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">FOOD</span>
+          <span class="brand-badge">UZ</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#categories" class="nav-link">Categories</a>
+        <a href="#popular" class="nav-link">Popular</a>
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#offers" class="nav-link">Offers</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Nav Action Buttons -->
+      <div class="nav-actions">
+        <!-- Search Trigger -->
+        <button id="header-search-btn" class="btn-icon" aria-label="Search dishes" title="Search dishes">
+          <i data-lucide="search"></i>
+        </button>
+
+        <!-- Favorites Button -->
+        <button id="nav-fav-btn" class="btn-icon" aria-label="View favorite dishes" title="Favorites">
+          <i data-lucide="heart"></i>
+          <span class="badge-counter fav-counter-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- Shopping Cart Button -->
+        <button id="nav-cart-btn" class="btn-icon" aria-label="Open shopping cart" title="Shopping Cart">
+          <i data-lucide="shopping-bag"></i>
+          <span class="badge-counter cart-counter-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- User Profile / Login Button -->
+        <button id="nav-user-btn" class="nav-user-pill" aria-label="Account Login">
+          <i data-lucide="user"></i>
+          <span id="nav-user-text">Login</span>
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button id="hamburger-btn" class="btn-icon hamburger-btn" aria-label="Open mobile navigation menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu-overlay" class="drawer-overlay"></div>
+  <aside id="mobile-menu-drawer" class="cart-drawer" style="right: auto; left: -320px; max-width: 300px; transition: left var(--transition-smooth);" aria-label="Mobile Menu">
+    <div class="drawer-header">
+      <div class="brand-logo">
+        <div class="brand-icon-box" style="width: 36px; height: 36px;">
+          <i data-lucide="utensils"></i>
+        </div>
+        <span class="brand-title" style="font-size: 1.3rem;">FOOD</span>
+      </div>
+      <button id="close-mobile-menu-btn" class="modal-close-btn" style="position: static;" aria-label="Close menu">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="cart-items-container" style="gap: 0.5rem;">
+      <a href="#home" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">Home</a>
+      <a href="#categories" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">Categories</a>
+      <a href="#popular" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">Popular Food</a>
+      <a href="#menu" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">Our Menu</a>
+      <a href="#offers" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">Special Offers</a>
+      <a href="#about" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">About Us</a>
+      <a href="#contact" class="nav-link" onclick="AppState.closeMobileMenu()" style="font-size: 1.1rem; padding: 0.8rem 0;">Contact</a>
+    </div>
+    <div class="drawer-footer">
+      <a href="tel:+998712000000" class="btn btn-outline" style="width: 100%; justify-content: center;">
+        <i data-lucide="phone-call"></i> +998 71 200 00 00
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="container hero-grid">
+        <!-- Hero Left Column -->
+        <div class="hero-content">
+          <div class="hero-badge animate-pop">
+            <i data-lucide="flame"></i>
+            <span>#1 Premium Food Delivery in Uzbekistan</span>
+          </div>
+
+          <h1 class="hero-title">
+            Delicious Food Delivered <span class="highlight-orange">To Your Door</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Order your favorite burgers, authentic stone-baked pizza, fresh rolls, handmade pasta, and decadent desserts in Tashkent. Prepared by master chefs and delivered in 30 minutes!
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#menu" class="btn btn-primary btn-lg">
+              <i data-lucide="shopping-bag"></i>
+              <span>Order Now</span>
+            </a>
+            <a href="#offers" class="btn btn-outline btn-lg">
+              <i data-lucide="sparkles"></i>
+              <span>Special Offers</span>
+            </a>
+          </div>
+
+          <!-- Hero Metrics -->
+          <div class="hero-stats-row">
+            <div class="stat-item">
+              <span class="stat-num">30 <small style="font-size: 1rem; color: var(--primary);">Min</small></span>
+              <span class="stat-label">Average Delivery</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">45K+</span>
+              <span class="stat-label">Happy Foodies</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">4.9 ★</span>
+              <span class="stat-label">Customer Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Column (Visual) -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <img 
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=80" 
+              alt="Delicious gourmet table with burgers, pizza, and sides" 
+              class="hero-main-img"
+            />
+
+            <!-- Floating Badge 1: Top Rated Dish -->
+            <div class="floating-card floating-card-1">
+              <div class="float-icon orange">
+                <i data-lucide="award"></i>
+              </div>
+              <div class="float-info">
+                <h5>Royal Tashkent Burger</h5>
+                <p>⭐ 4.9 (184+ reviews)</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2: Delivery Speed -->
+            <div class="floating-card floating-card-2">
+              <div class="float-icon green">
+                <i data-lucide="zap"></i>
+              </div>
+              <div class="float-info">
+                <h5>Lightning Fast</h5>
+                <p>25-30 min to your door</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CATEGORIES SECTION -->
+    <section id="categories" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i data-lucide="grid"></i> Explore by Taste</span>
+          <h2 class="section-title">Popular Categories</h2>
+          <p class="section-subtitle">Select your favorite food type to filter our chef-curated menu instantly</p>
+        </div>
+
+        <div class="categories-grid">
+          <!-- 1. Burgers -->
+          <button class="category-card-btn" data-category="burgers">
+            <div class="category-img-wrap">
+              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80" alt="Burgers" />
+            </div>
+            <h4>Burgers</h4>
+            <span>Juicy & Halal</span>
+          </button>
+
+          <!-- 2. Pizza -->
+          <button class="category-card-btn" data-category="pizza">
+            <div class="category-img-wrap">
+              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80" alt="Pizza" />
+            </div>
+            <h4>Pizza</h4>
+            <span>Stone Baked</span>
+          </button>
+
+          <!-- 3. Sushi -->
+          <button class="category-card-btn" data-category="sushi">
+            <div class="category-img-wrap">
+              <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=400&q=80" alt="Sushi" />
+            </div>
+            <h4>Sushi</h4>
+            <span>Fresh & Premium</span>
+          </button>
+
+          <!-- 4. Pasta -->
+          <button class="category-card-btn" data-category="pasta">
+            <div class="category-img-wrap">
+              <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281290?auto=format&fit=crop&w=400&q=80" alt="Pasta" />
+            </div>
+            <h4>Pasta</h4>
+            <span>Authentic Italian</span>
+          </button>
+
+          <!-- 5. Drinks -->
+          <button class="category-card-btn" data-category="drinks">
+            <div class="category-img-wrap">
+              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80" alt="Drinks" />
+            </div>
+            <h4>Drinks</h4>
+            <span>Coolers & Brews</span>
+          </button>
+
+          <!-- 6. Desserts -->
+          <button class="category-card-btn" data-category="desserts">
+            <div class="category-img-wrap">
+              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=400&q=80" alt="Desserts" />
+            </div>
+            <h4>Desserts</h4>
+            <span>Sweet Delights</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SPECIAL OFFERS & PROMOTIONS -->
+    <section id="offers" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i data-lucide="percent"></i> Best Deals in Tashkent</span>
+          <h2 class="section-title">Special Offers & Combos</h2>
+          <p class="section-subtitle">Take advantage of limited-time discounts and promo codes</p>
+        </div>
+
+        <div class="offers-grid">
+          <!-- Offer Card 1 -->
+          <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Steak & Burger Feast" class="offer-bg-img" />
+            <div class="offer-gradient"></div>
+            <div class="offer-content">
+              <span class="offer-badge">20% OFF</span>
+              <h3 class="offer-title">Uzbekistan Feast Deal</h3>
+              <p class="offer-desc">Save 20% on any food order over 100,000 UZS. Valid all week long.</p>
+              <div class="offer-action-row">
+                <span class="coupon-pill">FOODUZ20</span>
+                <button class="btn btn-primary btn-sm" onclick="copyPromoCode('FOODUZ20')">
+                  <i data-lucide="copy"></i> Copy & Apply
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offer Card 2 -->
+          <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Free Express Delivery" class="offer-bg-img" />
+            <div class="offer-gradient"></div>
+            <div class="offer-content">
+              <span class="offer-badge" style="background-color: #10B981;">FREE DELIVERY</span>
+              <h3 class="offer-title">Zero Delivery Fee</h3>
+              <p class="offer-desc">Free express delivery anywhere in Tashkent on any order size.</p>
+              <div class="offer-action-row">
+                <span class="coupon-pill">TASHKENTFREE</span>
+                <button class="btn btn-primary btn-sm" onclick="copyPromoCode('TASHKENTFREE')">
+                  <i data-lucide="copy"></i> Copy & Apply
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offer Card 3 -->
+          <div class="offer-card">
+            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80" alt="Sushi Lovers Special" class="offer-bg-img" />
+            <div class="offer-gradient"></div>
+            <div class="offer-content">
+              <span class="offer-badge" style="background-color: #8B5CF6;">NEW USER</span>
+              <h3 class="offer-title">Welcome 10% Discount</h3>
+              <p class="offer-desc">First time ordering with FOOD? Enjoy an instant 10% discount.</p>
+              <div class="offer-action-row">
+                <span class="coupon-pill">WELCOME10</span>
+                <button class="btn btn-primary btn-sm" onclick="copyPromoCode('WELCOME10')">
+                  <i data-lucide="copy"></i> Copy & Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. POPULAR FOOD SECTION (12 Products) -->
+    <section id="popular" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i data-lucide="trending-up"></i> Customer Favorites</span>
+          <h2 class="section-title">Most Popular Food</h2>
+          <p class="section-subtitle">Our top 12 rated dishes, freshly cooked and loved by food lovers across Tashkent</p>
+        </div>
+
+        <!-- Dynamic Popular Foods Grid (Rendered by JS) -->
+        <div id="popular-foods-grid" class="products-grid"></div>
+      </div>
+    </section>
+
+    <!-- 5. COMPLETE MENU SECTION (With Filtering, Search & Sorting) -->
+    <section id="menu" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i data-lucide="book-open"></i> Full Selection</span>
+          <h2 class="section-title">Explore Our Full Menu</h2>
+          <p class="section-subtitle">Filter by category, search by ingredient, or sort by price</p>
+        </div>
+
+        <!-- Menu Interactive Controls -->
+        <div class="menu-controls">
+          <!-- Real-time Search Input -->
+          <div class="menu-search-bar">
+            <i data-lucide="search" style="color: var(--text-muted);"></i>
+            <input 
+              type="text" 
+              id="menu-search-input" 
+              placeholder="Search burgers, pizza, sushi, ingredients, or desserts..." 
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Filters Row: Tabs + Sort Dropdown -->
+          <div class="menu-filters-row">
+            <div class="category-tabs" role="tablist">
+              <button class="category-tab active" data-category="all">All Dishes</button>
+              <button class="category-tab" data-category="burgers">Burgers</button>
+              <button class="category-tab" data-category="pizza">Pizza</button>
+              <button class="category-tab" data-category="sushi">Sushi</button>
+              <button class="category-tab" data-category="pasta">Pasta</button>
+              <button class="category-tab" data-category="drinks">Drinks</button>
+              <button class="category-tab" data-category="desserts">Desserts</button>
+            </div>
+
+            <div class="menu-sort-wrap">
+              <label for="menu-sort-select">Sort by:</label>
+              <select id="menu-sort-select" class="select-custom">
+                <option value="popular">Most Popular</option>
+                <option value="rating">Highest Rated</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Items Counter Display -->
+        <div class="menu-status-bar">
+          <span id="menu-items-count">Loading menu...</span>
+          <span>⚡ Delivered hot in 30 minutes</span>
+        </div>
+
+        <!-- Dynamic Menu Foods Grid (Rendered by JS) -->
+        <div id="menu-foods-grid" class="products-grid"></div>
+      </div>
+    </section>
+
+    <!-- 6. WHY CHOOSE US / FEATURES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i data-lucide="shield-check"></i> Quality & Speed</span>
+          <h2 class="section-title">Why Order With FOOD?</h2>
+          <p class="section-subtitle">Setting the gold standard for food delivery across Uzbekistan</p>
+        </div>
+
+        <div class="features-grid">
+          <!-- 1 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i data-lucide="clock"></i>
+            </div>
+            <h3 class="feature-title">30-Min Fast Delivery</h3>
+            <p class="feature-desc">Our dedicated couriers navigate Tashkent traffic to ensure your meals arrive piping hot and fresh.</p>
+          </div>
+
+          <!-- 2 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i data-lucide="check-circle-2"></i>
+            </div>
+            <h3 class="feature-title">100% Halal Certified</h3>
+            <p class="feature-desc">Every piece of meat and every recipe adheres strictly to authentic halal culinary standards.</p>
+          </div>
+
+          <!-- 3 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i data-lucide="credit-card"></i>
+            </div>
+            <h3 class="feature-title">Click, Payme & Cash</h3>
+            <p class="feature-desc">Pay seamlessly via your favorite local payment systems: Click, Payme, Uzcard, Humo, or Cash on delivery.</p>
+          </div>
+
+          <!-- 4 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i data-lucide="headphones"></i>
+            </div>
+            <h3 class="feature-title">24/7 Tashkent Support</h3>
+            <p class="feature-desc">Our friendly customer care team is always on standby to assist with your order via phone or Telegram.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ABOUT US SECTION -->
+    <section id="about" class="section section-alt">
+      <div class="container about-grid">
+        <!-- Visual Column -->
+        <div class="about-visual">
+          <img 
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80" 
+            alt="Master chefs preparing culinary dishes" 
+            class="about-main-img" 
+          />
+          <div class="about-floating-experience">
+            <h3>5+</h3>
+            <p>Years of Culinary Excellence in Tashkent</p>
+          </div>
+        </div>
+
+        <!-- Text Column -->
+        <div class="about-text">
+          <span class="section-badge"><i data-lucide="users"></i> About FOOD Uzbekistan</span>
+          <h2>Redefining Food Delivery With Passion & Taste</h2>
+          <p>
+            Founded in Tashkent, <strong>FOOD</strong> was born with a mission to deliver restaurant-quality meals with unmatched speed and care. We partner with the finest local kitchens and international culinary chefs to bring mouth-watering burgers, artisanal pizzas, authentic sushi, and handcrafted desserts straight to your dining table or office.
+          </p>
+          <p>
+            From Yunusabad to Chilanzar, Mirzo Ulugbek to Yakkasaray, our smart courier network ensures every dish is packed in eco-friendly thermal insulated boxes, preserving temperature and crispness.
+          </p>
+
+          <!-- Delivery & Customer Statistics -->
+          <div class="about-metrics-grid">
+            <div class="metric-card">
+              <h4>45,000+</h4>
+              <span>Satisfied Food Lovers</span>
+            </div>
+            <div class="metric-card">
+              <h4>120+</h4>
+              <span>Partner Kitchens & Chefs</span>
+            </div>
+            <div class="metric-card">
+              <h4>25 Min</h4>
+              <span>Average Courier Time</span>
+            </div>
+            <div class="metric-card">
+              <h4>99.8%</h4>
+              <span>On-Time Delivery Rate</span>
+            </div>
+          </div>
+
+          <a href="#menu" class="btn btn-primary">
+            <span>Explore Our Menu</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. MOBILE APP DOWNLOAD CTA BANNER -->
+    <section class="section" style="padding: 2rem 0;">
+      <div class="container">
+        <div class="app-banner">
+          <div class="app-banner-content">
+            <h2>Get The FOOD App for iOS & Android</h2>
+            <p>Track your courier live on the map, access app-exclusive discounts, and reorder your favorite Tashkent meals in just two taps.</p>
+            <div class="app-badges-row">
+              <a href="#offers" class="store-badge" onclick="showToast('iOS App download is coming soon to Uzbekistan App Store!', 'info')">
+                <i data-lucide="apple" style="width: 28px; height: 28px;"></i>
+                <div class="store-badge-text">
+                  <small>Download on the</small>
+                  <strong>App Store</strong>
+                </div>
+              </a>
+              <a href="#offers" class="store-badge" onclick="showToast('Google Play download is coming soon to Uzbekistan!', 'info')">
+                <i data-lucide="play" style="width: 28px; height: 28px;"></i>
+                <div class="store-badge-text">
+                  <small>Get it on</small>
+                  <strong>Google Play</strong>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <div style="background: rgba(255, 255, 255, 0.08); padding: 1.5rem; border-radius: var(--radius-xl); border: 1px dashed rgba(255, 255, 255, 0.3); text-align: center;">
+              <i data-lucide="qr-code" style="width: 90px; height: 90px; margin: 0 auto; color: white;"></i>
+              <p style="font-size: 0.85rem; color: #CBD5E1; margin-top: 0.75rem;">Scan QR to order on Mobile</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACT SECTION -->
+    <section id="contact" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge"><i data-lucide="mail"></i> Get In Touch</span>
+          <h2 class="section-title">Contact Our Tashkent Team</h2>
+          <p class="section-subtitle">Have questions, feedback, or corporate catering requests? We'd love to hear from you!</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info Details -->
+          <div class="contact-info-card">
+            <!-- 1. Phone -->
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon">
+                <i data-lucide="phone-call"></i>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Call Customer Care</h4>
+                <p><a href="tel:+998712000000">+998 (71) 200-00-00</a></p>
+                <p><a href="tel:+998901234567">+998 (90) 123-45-67 (Hotline)</a></p>
+              </div>
+            </div>
+
+            <!-- 2. Email -->
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon">
+                <i data-lucide="mail"></i>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Email Support</h4>
+                <p><a href="mailto:support@food.uz">support@food.uz</a></p>
+                <p><a href="mailto:orders@food.uz">orders@food.uz</a></p>
+              </div>
+            </div>
+
+            <!-- 3. Address -->
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon">
+                <i data-lucide="map-pin"></i>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Headquarters & Central Hub</h4>
+                <p>Amir Temur Avenue 107B, Mirzo Ulugbek District</p>
+                <p>Tashkent 100084, Republic of Uzbekistan</p>
+                <p><small style="color: var(--primary); font-weight: 700;">Open everyday: 09:00 - 02:00</small></p>
+              </div>
+            </div>
+
+            <!-- 4. Delivery Zones in Tashkent -->
+            <div class="contact-detail-item">
+              <div class="contact-detail-icon">
+                <i data-lucide="truck"></i>
+              </div>
+              <div class="contact-detail-text">
+                <h4>Active Delivery Districts in Tashkent</h4>
+                <div class="delivery-zones-badge-list">
+                  <span class="zone-chip">Mirzo Ulugbek</span>
+                  <span class="zone-chip">Yunusabad</span>
+                  <span class="zone-chip">Chilanzar</span>
+                  <span class="zone-chip">Yakkasaray</span>
+                  <span class="zone-chip">Mirabad</span>
+                  <span class="zone-chip">Shaykhontohur</span>
+                  <span class="zone-chip">Almazar</span>
+                  <span class="zone-chip">Yashnabad</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-card">
+            <h3>Send Us a Message</h3>
+            <p>Fill out the form below and our team will get back to you within 15 minutes.</p>
+
+            <form id="contact-form">
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="contact-name">Your Full Name *</label>
+                  <input type="text" id="contact-name" class="form-control" placeholder="e.g. Aziz Karimov" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-phone">Phone Number (+998) *</label>
+                  <input type="tel" id="contact-phone" class="form-control" placeholder="+998 90 123 45 67" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" class="form-control" placeholder="aziz@example.com" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-subject">Topic / Subject</label>
+                <select id="contact-subject" class="form-control">
+                  <option value="order">Order Inquiry / Support</option>
+                  <option value="catering">Corporate / Party Catering</option>
+                  <option value="partnership">Restaurant Partnership</option>
+                  <option value="feedback">Feedback & Suggestions</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-msg">Message *</label>
+                <textarea id="contact-msg" class="form-control" placeholder="How can we help you today?" required></textarea>
+              </div>
+
+              <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+                <span>Send Message</span>
+                <i data-lucide="send"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 10. FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="#home" class="brand-logo">
+            <div class="brand-icon-box">
+              <i data-lucide="utensils"></i>
+            </div>
+            <div class="brand-text-wrap">
+              <span class="brand-title">FOOD</span>
+              <span class="brand-badge">UZ</span>
+            </div>
+          </a>
+          <p>
+            Uzbekistan's premier modern food delivery platform. Delivering fresh, 100% Halal gourmet food across Tashkent with speed, care, and guaranteed quality.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Telegram" title="Telegram">
+              <i data-lucide="send"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook" title="Facebook">
+              <i data-lucide="facebook"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube" title="YouTube">
+              <i data-lucide="youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-heading">Quick Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#categories">Food Categories</a></li>
+            <li><a href="#popular">Popular Dishes</a></li>
+            <li><a href="#menu">Full Menu</a></li>
+            <li><a href="#offers">Promotions & Coupons</a></li>
+            <li><a href="#about">About Our Story</a></li>
+          </ul>
+        </div>
+
+        <!-- Food Categories -->
+        <div>
+          <h4 class="footer-heading">Categories</h4>
+          <ul class="footer-links-list">
+            <li><a href="#menu" onclick="AppState.activeCategory='burgers'; AppState.renderMenuSection();">Burgers & Smash</a></li>
+            <li><a href="#menu" onclick="AppState.activeCategory='pizza'; AppState.renderMenuSection();">Artisan Pizza</a></li>
+            <li><a href="#menu" onclick="AppState.activeCategory='sushi'; AppState.renderMenuSection();">Fresh Sushi & Rolls</a></li>
+            <li><a href="#menu" onclick="AppState.activeCategory='pasta'; AppState.renderMenuSection();">Italian Pasta</a></li>
+            <li><a href="#menu" onclick="AppState.activeCategory='drinks'; AppState.renderMenuSection();">Coolers & Beverages</a></li>
+            <li><a href="#menu" onclick="AppState.activeCategory='desserts'; AppState.renderMenuSection();">Gourmet Desserts</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter & Contact -->
+        <div class="footer-newsletter">
+          <h4 class="footer-heading">Stay Updated</h4>
+          <p>Subscribe for secret Friday promo codes, new menu items, and Tashkent delivery specials.</p>
+          <form id="newsletter-form">
+            <div class="newsletter-form-group">
+              <input type="email" placeholder="Enter your email" required />
+              <button type="submit" class="btn btn-primary" aria-label="Subscribe">
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </form>
+          <div style="margin-top: 1.5rem; font-size: 0.85rem; color: #94A3B8;">
+            <p>📞 Hotline: <strong>+998 (71) 200-00-00</strong></p>
+            <p>📍 Amir Temur 107B, Tashkent</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>
+          <p>&copy; 2026 FOOD.UZ. All rights reserved. Crafted with ❤️ for Uzbekistan.</p>
+        </div>
+
+        <!-- Payment Badges Supported in Uzbekistan -->
+        <div class="payment-badges-row">
+          <span style="font-size: 0.8rem; color: #94A3B8; margin-right: 0.3rem;">Payment Demo:</span>
+          <span class="payment-badge-pill click">CLICK</span>
+          <span class="payment-badge-pill payme">PAYME</span>
+          <span class="payment-badge-pill" style="background: #2563EB;">UZCARD</span>
+          <span class="payment-badge-pill" style="background: #EA580C;">HUMO</span>
+          <span class="payment-badge-pill" style="background: #1E293B;">CASH</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       SHOPPING CART DRAWER (Slide-out)
+       ========================================== -->
+  <div id="cart-drawer-overlay" class="drawer-overlay"></div>
+  <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart Drawer">
+    <div class="drawer-header">
+      <h3>
+        <i data-lucide="shopping-bag" style="color: var(--primary);"></i>
+        <span>Your Order</span>
+      </h3>
+      <button id="close-cart-btn" class="modal-close-btn" style="position: static;" aria-label="Close cart">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="free-shipping-card">
+      <p id="free-shipping-text">Add 150,000 UZS more to unlock <strong>FREE Delivery</strong> in Tashkent!</p>
+      <div class="progress-track">
+        <div id="free-shipping-progress" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="cart-empty-state" class="empty-state" style="display: none;">
+      <div class="empty-icon-wrap">
+        <i data-lucide="shopping-cart"></i>
+      </div>
+      <h3>Your cart is empty</h3>
+      <p>Looks like you haven't added anything to your cart yet. Explore our delicious menu!</p>
+      <button class="btn btn-primary" onclick="AppState.closeCartDrawer(); document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });">
+        <span>Browse Dishes</span>
+        <i data-lucide="arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- Filled State: Cart Items List -->
+    <div id="cart-drawer-items" class="cart-items-container"></div>
+
+    <!-- Drawer Footer & Price Calculations -->
+    <div id="cart-filled-state" class="drawer-footer">
+      <!-- Coupon Application Section -->
+      <div id="applied-coupon-badge" class="applied-coupon-pill" style="display: none;"></div>
+
+      <form id="cart-coupon-form" class="coupon-input-group">
+        <input type="text" id="cart-coupon-input" placeholder="PROMO CODE (e.g. FOODUZ20)" />
+        <button type="submit" class="btn btn-outline btn-sm">Apply</button>
+      </form>
+
+      <!-- Subtotal Breakdown -->
+      <div class="cart-summary-breakdown">
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal">0 UZS</span>
+        </div>
+        <div class="summary-row" id="cart-discount-row" style="display: none; color: var(--success); font-weight: 700;">
+          <span>Promo Discount:</span>
+          <span id="cart-discount">-0 UZS</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery in Tashkent:</span>
+          <span id="cart-delivery">15,000 UZS</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span id="cart-total" style="color: var(--primary);">0 UZS</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cart-drawer-actions">
+        <button class="btn btn-outline btn-sm" onclick="AppState.clearCart()" title="Clear all items">
+          <i data-lucide="trash-2"></i>
+        </button>
+        <button id="cart-checkout-btn" class="btn btn-primary btn-lg flex-1" style="flex: 1;">
+          <span>Checkout (Demo)</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       CHECKOUT MODAL (Complete Demo)
+       ========================================== -->
+  <div id="checkout-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-card lg">
+      <button class="modal-close-btn" aria-label="Close checkout modal">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+        <span class="section-badge"><i data-lucide="check-circle"></i> Fast Checkout</span>
+        <h2 id="checkout-modal-title" class="section-title" style="font-size: 1.8rem;">Delivery Details & Payment</h2>
+        <p class="section-subtitle">Please enter your delivery address in Tashkent (Demo)</p>
+      </div>
+
+      <form id="checkout-form">
+        <div class="checkout-grid">
+          <!-- Left: Address & Customer Details -->
+          <div>
+            <div class="form-group">
+              <label class="form-label" for="checkout-name">Full Name *</label>
+              <input type="text" id="checkout-name" class="form-control" placeholder="Aziz Karimov" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkout-phone">Phone Number (+998) *</label>
+              <input type="tel" id="checkout-phone" class="form-control" placeholder="+998 90 123 45 67" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkout-district">District in Tashkent *</label>
+              <select id="checkout-district" class="form-control" required>
+                <option value="Mirzo Ulugbek">Mirzo Ulugbek District</option>
+                <option value="Yunusabad">Yunusabad District</option>
+                <option value="Chilanzar">Chilanzar District</option>
+                <option value="Yakkasaray">Yakkasaray District</option>
+                <option value="Mirabad">Mirabad District</option>
+                <option value="Shaykhontohur">Shaykhontohur District</option>
+                <option value="Almazar">Almazar District</option>
+                <option value="Yashnabad">Yashnabad District</option>
+                <option value="Uchtepa">Uchtepa District</option>
+                <option value="Sergeli">Sergeli District</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkout-address">Street Address, House & Apt *</label>
+              <input type="text" id="checkout-address" class="form-control" placeholder="Amir Temur Ave 107B, Apt 24, Entrance 2" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="checkout-notes">Courier Delivery Instructions</label>
+              <input type="text" id="checkout-notes" class="form-control" placeholder="e.g. Ring intercom 24 or call upon arrival" />
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="form-group" style="margin-top: 1.5rem;">
+              <label class="form-label">Select Payment Method (Uzbekistan)</label>
+              <div class="payment-options-grid">
+                <label class="payment-radio-card">
+                  <input type="radio" name="payment_method" value="click" checked />
+                  <div>
+                    <span class="payment-radio-title">CLICK</span>
+                    <small style="display: block; color: var(--text-muted); font-size: 0.75rem;">Pay via Click App</small>
+                  </div>
+                </label>
+
+                <label class="payment-radio-card">
+                  <input type="radio" name="payment_method" value="payme" />
+                  <div>
+                    <span class="payment-radio-title">Payme</span>
+                    <small style="display: block; color: var(--text-muted); font-size: 0.75rem;">Pay via Payme App</small>
+                  </div>
+                </label>
+
+                <label class="payment-radio-card">
+                  <input type="radio" name="payment_method" value="cash" />
+                  <div>
+                    <span class="payment-radio-title">Cash on Delivery</span>
+                    <small style="display: block; color: var(--text-muted); font-size: 0.75rem;">Pay courier directly</small>
+                  </div>
+                </label>
+
+                <label class="payment-radio-card">
+                  <input type="radio" name="payment_method" value="terminal" />
+                  <div>
+                    <span class="payment-radio-title">Uzcard / Humo</span>
+                    <small style="display: block; color: var(--text-muted); font-size: 0.75rem;">POS terminal on delivery</small>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Order Summary Preview -->
+          <div>
+            <div class="checkout-summary-box">
+              <h4 style="font-weight: 800; font-size: 1.1rem; color: var(--secondary);">Order Review</h4>
+              <div id="checkout-order-summary" style="display: flex; flex-direction: column; gap: 0.75rem; max-height: 220px; overflow-y: auto;"></div>
+
+              <div class="receipt-divider"></div>
+
+              <div class="cart-summary-breakdown">
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span id="checkout-subtotal">0 UZS</span>
+                </div>
+                <div class="summary-row" id="checkout-discount-row" style="display: none; color: var(--success); font-weight: 700;">
+                  <span>Discount:</span>
+                  <span id="checkout-discount">-0 UZS</span>
+                </div>
+                <div class="summary-row">
+                  <span>Delivery in Tashkent:</span>
+                  <span id="checkout-delivery">15,000 UZS</span>
+                </div>
+                <div class="summary-row total">
+                  <span>Total Due:</span>
+                  <span id="checkout-total" style="color: var(--primary);">0 UZS</span>
+                </div>
+              </div>
+
+              <div style="background: var(--warning-light); border: 1px solid var(--warning); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: #92400E;">
+                <i data-lucide="info" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                Demo Mode: No actual charge occurs. Orders are simulated with live tracking.
+              </div>
+
+              <button type="submit" id="checkout-submit-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+                <span>Confirm & Place Order (Demo)</span>
+                <i data-lucide="check"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       ORDER CONFIRMATION MODAL
+       ========================================== -->
+  <div id="order-confirmation-modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-card" style="max-width: 580px;">
+      <button class="modal-close-btn" aria-label="Close confirmation">
+        <i data-lucide="x"></i>
+      </button>
+      <div id="order-confirmation-content"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FAVORITES DRAWER / MODAL
+       ========================================== -->
+  <div id="favorites-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="fav-modal-title">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-card" style="max-width: 540px;">
+      <button class="modal-close-btn" aria-label="Close favorites">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem;">
+        <i data-lucide="heart" style="color: var(--danger); fill: var(--danger); width: 28px; height: 28px;"></i>
+        <h3 id="fav-modal-title" style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">Saved Favorites</h3>
+      </div>
+
+      <!-- Empty State -->
+      <div id="favorites-empty-state" class="empty-state" style="display: none; padding: 2rem 0;">
+        <div class="empty-icon-wrap" style="background: var(--danger-light); color: var(--danger);">
+          <i data-lucide="heart-off"></i>
+        </div>
+        <h3>No favorite dishes yet</h3>
+        <p>Click the heart icon on any burger, pizza, sushi, or dessert to bookmark it here!</p>
+      </div>
+
+      <!-- Favorites List Container -->
+      <div id="favorites-list" style="display: flex; flex-direction: column; gap: 1rem; max-height: 400px; overflow-y: auto;"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PRODUCT QUICK VIEW MODAL
+       ========================================== -->
+  <div id="quick-view-modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-card lg">
+      <button class="modal-close-btn" aria-label="Close quick view">
+        <i data-lucide="x"></i>
+      </button>
+      <div id="quick-view-content"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       AUTHENTICATION / LOGIN MODAL (DEMO)
+       ========================================== -->
+  <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content-card" style="max-width: 440px;">
+      <button class="modal-close-btn" aria-label="Close login">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div style="text-align: center; margin-bottom: 1.75rem;">
+        <div class="brand-icon-box" style="margin: 0 auto 1rem auto;">
+          <i data-lucide="user"></i>
+        </div>
+        <h3 id="login-modal-title" style="font-size: 1.6rem; font-weight: 800; color: var(--secondary);">Welcome to FOOD</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Login or continue as guest to save your favorites & track orders.</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-name">Your Name</label>
+          <input type="text" id="login-name" class="form-control" placeholder="e.g. Aziz Karimov" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-phone">Phone Number (+998)</label>
+          <input type="tel" id="login-phone" class="form-control" placeholder="+998 90 123 45 67" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 0.5rem;">
+          <span>Sign In / Continue</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </form>
+
+      <div style="position: relative; margin: 1.5rem 0; text-align: center;">
+        <hr style="border: none; border-top: 1px solid var(--border-color);" />
+        <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 0.8rem; color: var(--text-muted);">OR</span>
+      </div>
+
+      <button type="button" id="demo-login-btn" class="btn btn-outline" style="width: 100%;">
+        <i data-lucide="zap"></i> Quick 1-Click Demo Login
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MOBILE BOTTOM NAVIGATION BAR
+       ========================================== -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <div class="mobile-bottom-inner">
+      <a href="#home" class="mobile-nav-item active">
+        <i data-lucide="home"></i>
+        <span>Home</span>
+      </a>
+      <a href="#menu" class="mobile-nav-item">
+        <i data-lucide="utensils"></i>
+        <span>Menu</span>
+      </a>
+      <button id="mobile-nav-fav-btn" class="mobile-nav-item" aria-label="Favorites">
+        <i data-lucide="heart"></i>
+        <span>Favorites</span>
+        <span class="badge-counter fav-counter-badge" style="display: none; top: -2px; right: 8px;">0</span>
+      </button>
+      <button id="mobile-nav-cart-btn" class="mobile-nav-item" aria-label="Cart">
+        <i data-lucide="shopping-bag"></i>
+        <span>Cart</span>
+        <span class="badge-counter cart-counter-badge" style="display: none; top: -2px; right: 8px;">0</span>
+      </button>
+      <button id="mobile-nav-user-btn" class="mobile-nav-item" aria-label="Account">
+        <i data-lucide="user"></i>
+        <span>Account</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Floating Scroll To Top Button -->
+  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll back to top" title="Scroll to top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

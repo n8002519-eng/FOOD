@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
+  <!-- Icon container -->
+  <rect x="2" y="5" width="40" height="40" rx="12" fill="#FF5722"/>
+  <path d="M16 16V26C16 27.6569 17.3431 29 19 29H20.5V36C20.5 36.8284 21.1716 37.5 22 37.5H23C23.8284 37.5 24.5 36.8284 24.5 36V29H26C27.6569 29 29 27.6569 29 26V16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20.5 16V24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <path d="M24.5 16V24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="34" cy="14" r="3.5" fill="#FFD54F"/>
+  
+  <!-- Text: FOOD -->
+  <text x="52" y="34" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-size="28" font-weight="900" fill="#0F172A" letter-spacing="-0.5">FOOD</text>
+  
+  <!-- Accent dot & UZ badge -->
+  <circle cx="137" cy="31" r="4.5" fill="#FF5722"/>
+  <rect x="146" y="16" width="36" height="18" rx="6" fill="#FFF3E0"/>
+  <text x="154" y="29" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-size="10" font-weight="800" fill="#E64A19" letter-spacing="1">UZ</text>
+</svg>
