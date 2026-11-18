@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sahro
 
-## Getting Started
+O‘zbek restoraniga mo‘ljallangan zamonaviy, moslashuvchan veb-sayt. Loyiha Next.js App Router, React, TypeScript va Tailwind CSS bilan yaratilgan.
 
-First, run the development server:
+## Imkoniyatlar
+
+- Restoran, taomlar va ish vaqti haqida bosh sahifa
+- Kategoriyalar bo‘yicha filtrlanuvchi taomlar menyusi
+- Restoran tarixi va stol band qilish bo‘limi
+- Mobil, planshet va kompyuter ekranlariga mos dizayn
+- O‘zbek tilidagi sahifa metama’lumotlari va Open Graph
+- GitHub Actions CI: lint, TypeScript tur tekshiruvi va production build
+
+> **Demo eslatmasi:** bron formasi hozircha backendga ulanmagan; kiritilgan ma’lumot saqlanmaydi. Ishga tushirishdan oldin restoran nomi, menyu, kontakt ma’lumotlari va tashqi rasmlarni o‘zingiznikiga almashtiring.
+
+## Ishga tushirish
+
+Talablar: Node.js 22 yoki undan yangisi va npm.
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Brauzerda [http://localhost:3000](http://localhost:3000) manzilini oching.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tekshiruvlar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run typecheck
+npm run build
+```
 
-## Learn More
+## GitHub’ga joylash
 
-To learn more about Next.js, take a look at the following resources:
+1. GitHub’da yangi, bo‘sh repository yarating.
+2. Loyiha papkasida quyidagi buyruqlarni bajaring:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git branch -M main
+git remote add origin https://github.com/<USERNAME>/<REPOSITORY>.git
+git push -u origin main
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Pull request ochilganda `.github/workflows/ci.yml` avtomatik ravishda lint, typecheck va production build tekshiruvlarini bajaradi.
 
-## Deploy on Vercel
+## Loyiha tuzilishi
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/app/
+  globals.css   # Dizayn va moslashuvchan stillar
+  layout.tsx    # Umumiy HTML layout va SEO metadata
+  page.tsx      # Restoran bosh sahifasi va interaktiv menyu
+.github/
+  workflows/ci.yml
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Keyingi qadamlar
+
+- Bron so‘rovlarini saqlash uchun API yoki backend xizmatini ulash.
+- `src/app/page.tsx` dagi namunaviy taomlar, narxlar va rasmlarni restoran ma’lumotlari bilan almashtirish.
+- Mahalliy rasmlar, haqiqiy manzil va aloqa ma’lumotlarini qo‘shish.
